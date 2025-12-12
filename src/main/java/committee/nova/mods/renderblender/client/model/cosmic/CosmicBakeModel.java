@@ -97,4 +97,5 @@ public class CosmicBakeModel extends WrappedItemModel {
     public boolean isCosmic() {
         return true;
     }
+
 }

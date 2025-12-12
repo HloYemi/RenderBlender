@@ -5,7 +5,9 @@
   "refmap": "renderblender.refmap.json",
   "client": [
     "RenderBuffersMixin",
-    "ItemRendererMixin"
+    "ItemRendererMixin",
+    "GameRendererMixin",
+    "accessors.GameRendererAccessor"
   ],
   "injectors": {
     "defaultRequire": 1
