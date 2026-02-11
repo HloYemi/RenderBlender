@@ -152,7 +152,7 @@ public class GlslProcessor {
             includes = extractIncludes(lines, linesToComment);
             version = extractVersion(lines, linesToComment);
         }
-
+        @SuppressWarnings("removal")
         private static List<ResourceLocation> extractIncludes(List<String> lines, IntSet linesToComment) {
             List<ResourceLocation> imports = new LinkedList<>();
             for (int i = 0; i < lines.size(); i++) {

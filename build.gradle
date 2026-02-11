@@ -78,8 +78,6 @@ repositories {
         compileOnly(annotationProcessor("io.github.llamalad7:mixinextras-common:[0.4.1,0.5.0)"))
         implementation(jarJar("io.github.llamalad7:mixinextras-forge:[0.4.1,0.5.0)"))
 
-        implementation fg.deobf("curse.maven:oculus-581495:6020952")
-        implementation fg.deobf("curse.maven:embeddium-908741:5681725")
     }
 
     tasks.named('processResources', ProcessResources).configure {

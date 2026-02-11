@@ -30,7 +30,7 @@ import java.util.List;
 import java.util.Map;
 
 import static committee.nova.mods.renderblender.RenderBlenderLib.LOGGER;
-
+@SuppressWarnings("removal")
 public class TextureUtils {
     /**
      * 药水图标文件夹路径

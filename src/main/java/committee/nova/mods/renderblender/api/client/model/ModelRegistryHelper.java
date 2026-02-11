@@ -16,6 +16,7 @@ public class ModelRegistryHelper {
 
     private final List<Pair<ModelResourceLocation, BakedModel>> registerModels = new LinkedList<>();
 
+    @SuppressWarnings("removal")
     public ModelRegistryHelper() {
         this(FMLJavaModLoadingContext.get().getModEventBus());
     }

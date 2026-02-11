@@ -62,6 +62,7 @@ public class RBShaders {
     public static Uniform glowWidth;
     public static Uniform glowTime;
 
+    @SuppressWarnings("removal")
     public static void onRegisterShaders(RegisterShadersEvent event) {
 
         COSMIC_SHADER = CCShaderInstance.create(event.getResourceProvider(), new ResourceLocation(RenderBlenderLib.MOD_ID, "cosmic"), DefaultVertexFormat.BLOCK);

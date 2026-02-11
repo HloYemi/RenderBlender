@@ -88,7 +88,7 @@ public class HaloCosmicModelLoader implements IGeometryLoader<HaloCosmicModelLoa
             this.pulse = pulse;
             this.maskTextures = maskTextures;
         }
-
+        @SuppressWarnings("removal")
         @Override
         public BakedModel bake(IGeometryBakingContext context, ModelBaker baker, Function<Material, TextureAtlasSprite> spriteGetter, ModelState modelState, ItemOverrides overrides, ResourceLocation modelLocation) {
 

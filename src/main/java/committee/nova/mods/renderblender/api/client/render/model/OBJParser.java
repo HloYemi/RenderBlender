@@ -220,7 +220,7 @@ public class OBJParser {
         }
         return values;
     }
-
+    @SuppressWarnings("removal")
     private static ResourceLocation maybeRelative(ResourceLocation other, String resource) {
         if (resource.contains(":")) {
             return new ResourceLocation(resource);
@@ -232,6 +232,7 @@ public class OBJParser {
         } else {
             path = "";
         }
+
         return new ResourceLocation(other.getNamespace(), path + "/" + resource);
     }
 

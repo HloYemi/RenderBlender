@@ -53,7 +53,7 @@ public class UnstableModelLoader implements IGeometryLoader<UnstableModelLoader.
             this.baseModel = baseModel;
             this.maskTextures = maskTextures;
         }
-
+        @SuppressWarnings("removal")
         @Override
         public BakedModel bake(IGeometryBakingContext context, ModelBaker baker, Function<Material, TextureAtlasSprite> spriteGetter, ModelState modelState, ItemOverrides overrides, ResourceLocation modelLocation) {
             BakedModel baseBakedModel = this.baseModel.bake(baker, this.baseModel, spriteGetter, modelState, modelLocation, true);

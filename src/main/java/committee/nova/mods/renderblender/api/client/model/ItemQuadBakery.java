@@ -22,7 +22,7 @@ public class ItemQuadBakery {
     public static List<BakedQuad> bakeItem(TextureAtlasSprite... sprites) {
         return bakeItem(IDENTITY, sprites);
     }
-
+    @SuppressWarnings("removal")
     public static List<BakedQuad> bakeItem(ModelState state, TextureAtlasSprite... sprites) {
         // LambdaUtils.checkArgument(sprites, "Sprites must not be Null or empty!", ArrayUtils::isNullOrContainsNull);
 

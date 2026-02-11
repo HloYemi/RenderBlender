@@ -21,12 +21,15 @@ public class RenderBlenderLib
     public static final String MOD_ID = "renderblender";
 
     public static final Logger LOGGER = LogUtils.getLogger();
+    @SuppressWarnings("removal")
     public static ResourceLocation rl(String path) {
         return new ResourceLocation(MOD_ID, path);
     }
+
     public static final Gson GSON = new GsonBuilder().setPrettyPrinting().enableComplexMapKeySerialization().create();
     public RenderBlenderLib()
     {
+        @SuppressWarnings("removal")
         IEventBus modEventBus = FMLJavaModLoadingContext.get().getModEventBus();
         modEventBus.addListener(this::commonSetup);
         modEventBus.addListener(ModDataGen::gatherData);

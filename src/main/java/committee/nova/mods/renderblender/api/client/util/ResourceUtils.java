@@ -44,6 +44,7 @@ public class ResourceUtils {
      * @return The gotten resource.
      * @throws IOException If the resource doesn't exist, or some other IO error occurred.
      */
+    @SuppressWarnings("removal")
     public static Resource getResource(String location) throws IOException {
         return getResource(new ResourceLocation(location));
     }

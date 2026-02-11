@@ -174,7 +174,7 @@ public class CCShaderInstance extends ShaderInstance {
         }
         uniforms.add(uniform);
     }
-
+    @SuppressWarnings("removal")
     public Program compileProgram(ResourceProvider resourceProvider, Program.Type programType, ResourceLocation loc) throws IOException {
         ResourceLocation adjustedLoc = new ResourceLocation(loc.getNamespace(), "shaders/core/" + loc.getPath() + programType.getExtension());
         String cacheString = "ccl__" + adjustedLoc;

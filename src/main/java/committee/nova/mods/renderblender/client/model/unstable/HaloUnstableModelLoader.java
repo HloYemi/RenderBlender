@@ -85,7 +85,7 @@ public class HaloUnstableModelLoader implements IGeometryLoader<HaloUnstableMode
             this.pulse = pulse;
             this.maskTextures = maskTextures;
         }
-
+        @SuppressWarnings("removal")
         @Override
         public BakedModel bake(IGeometryBakingContext context, ModelBaker baker, Function<Material, TextureAtlasSprite> spriteGetter, ModelState modelState, ItemOverrides overrides, ResourceLocation modelLocation) {
 

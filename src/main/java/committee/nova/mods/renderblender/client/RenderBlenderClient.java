@@ -1,6 +1,7 @@
 package committee.nova.mods.renderblender.client;
 
 import committee.nova.mods.renderblender.RenderBlenderLib;
+import committee.nova.mods.renderblender.client.model.enchantment.GlintModelLoader;
 import committee.nova.mods.renderblender.client.model.*;
 import committee.nova.mods.renderblender.client.model.cosmic.CosmicModelLoader;
 import committee.nova.mods.renderblender.client.model.cosmic.HaloCosmicModelLoader;

@@ -52,7 +52,7 @@ public class HellModelLoader implements IGeometryLoader<HellModelLoader.HellGeom
             this.baseModel = baseModel;
             this.maskTextures = maskTextures;
         }
-
+        @SuppressWarnings("removal")
         @Override
         public BakedModel bake(IGeometryBakingContext context, ModelBaker baker, Function<Material, TextureAtlasSprite> spriteGetter, ModelState modelState, ItemOverrides overrides, ResourceLocation modelLocation) {
             BakedModel baseBakedModel = this.baseModel.bake(baker, this.baseModel, spriteGetter, modelState, modelLocation, true);
