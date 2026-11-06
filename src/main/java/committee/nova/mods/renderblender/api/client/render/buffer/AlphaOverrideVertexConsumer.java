@@ -20,7 +20,7 @@ public class AlphaOverrideVertexConsumer extends DelegatingVertexConsumer {
     }
 
     @Override
-    public @NotNull VertexConsumer color(int r, int g, int b, int a) {
-        return super.color(r, g, b, alpha);
+    public @NotNull VertexConsumer setColor(int r, int g, int b, int a) {
+        return super.setColor(r, g, b, alpha);
     }
 }

@@ -11,6 +11,7 @@ import committee.nova.mods.renderblender.client.model.hell.HellModelLoader;
 import committee.nova.mods.renderblender.client.model.unstable.HaloUnstableModelLoader;
 import committee.nova.mods.renderblender.client.model.unstable.UnstableModelLoader;
 import committee.nova.mods.renderblender.client.shader.RBShaders;
+import net.minecraft.resources.ResourceLocation;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.bus.api.EventPriority;
 import net.neoforged.bus.api.SubscribeEvent;
@@ -28,16 +29,16 @@ public class RenderBlenderClient {
 
     @SubscribeEvent
     public static void registerLoaders(ModelEvent.RegisterGeometryLoaders event) {
-        event.register("cosmic", CosmicModelLoader.INSTANCE);
-        event.register("halo", HaloModelLoader.INSTANCE);
-        event.register("eternal", EternalModelLoader.INSTANCE);
-        event.register("hell", HellModelLoader.INSTANCE);
-        event.register("unstable", UnstableModelLoader.INSTANCE);
-        event.register("halo_unstable", HaloUnstableModelLoader.INSTANCE);
-        event.register("halo_hell", HaloHellModelLoader.INSTANCE);
-        event.register("halo_cosmic", HaloCosmicModelLoader.INSTANCE);
-        event.register("halo_eternal", HaloEternalModelLoader.INSTANCE);
-        event.register("glow_edge", GlowEdgeModelLoader.INSTANCE);
-        event.register("scale", ScaleModelLoader.INSTANCE);
+        event.register(ResourceLocation.fromNamespaceAndPath(RenderBlenderLib.MOD_ID, "cosmic"), CosmicModelLoader.INSTANCE);
+        event.register(ResourceLocation.fromNamespaceAndPath(RenderBlenderLib.MOD_ID, "halo"), HaloModelLoader.INSTANCE);
+        event.register(ResourceLocation.fromNamespaceAndPath(RenderBlenderLib.MOD_ID, "eternal"), EternalModelLoader.INSTANCE);
+        event.register(ResourceLocation.fromNamespaceAndPath(RenderBlenderLib.MOD_ID, "hell"), HellModelLoader.INSTANCE);
+        event.register(ResourceLocation.fromNamespaceAndPath(RenderBlenderLib.MOD_ID, "unstable"), UnstableModelLoader.INSTANCE);
+        event.register(ResourceLocation.fromNamespaceAndPath(RenderBlenderLib.MOD_ID, "halo_unstable"), HaloUnstableModelLoader.INSTANCE);
+        event.register(ResourceLocation.fromNamespaceAndPath(RenderBlenderLib.MOD_ID, "halo_hell"), HaloHellModelLoader.INSTANCE);
+        event.register(ResourceLocation.fromNamespaceAndPath(RenderBlenderLib.MOD_ID, "halo_cosmic"), HaloCosmicModelLoader.INSTANCE);
+        event.register(ResourceLocation.fromNamespaceAndPath(RenderBlenderLib.MOD_ID, "halo_eternal"), HaloEternalModelLoader.INSTANCE);
+        event.register(ResourceLocation.fromNamespaceAndPath(RenderBlenderLib.MOD_ID, "glow_edge"), GlowEdgeModelLoader.INSTANCE);
+        event.register(ResourceLocation.fromNamespaceAndPath(RenderBlenderLib.MOD_ID, "scale"), ScaleModelLoader.INSTANCE);
     }
 }
