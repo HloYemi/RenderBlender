@@ -2,7 +2,7 @@ plugins {
     id 'eclipse'
     id 'idea'
     id 'maven-publish'
-    id 'net.neoforged.moddev' version '0.1.110'
+    id 'net.neoforged.moddev' version '1.0.11'
 }
 
 version = mod_version
@@ -17,22 +17,19 @@ java.toolchain.languageVersion = JavaLanguageVersion.of(21)
 println "Java: ${System.getProperty 'java.version'}, JVM: ${System.getProperty 'java.vm.version'} (${System.getProperty 'java.vendor'}), Arch: ${System.getProperty 'os.arch'}"
 
 neoForge {
-    version = "${minecraft_version}-${neo_version}"
+    // NeoForge version only (e.g. 21.1.77). The Minecraft version is inferred.
+    version = "${neo_version}"
 
     // Parchment mappings for IDE/development names.
     parchment {
-        parchmentVersion = "${parchment_version}"
+        minecraftVersion = "${parchment_minecraft_version}"
+        mappingsVersion = "${parchment_mappings_version}"
     }
 
-    // Access transformer (auto-detected from META-INF/accesstransformer.cfg, kept explicit for clarity).
-    accessTransformers {
-        file 'src/main/resources/META-INF/accesstransformer.cfg'
-    }
-
+    // Access Transformers are auto-detected from META-INF/accesstransformer.cfg.
     runs {
         configureEach {
             systemProperty 'neoforge.logging.markers', 'REGISTRIES'
-            logLevel = org.slf4j.event.Level.DEBUG
         }
 
         client {
@@ -47,7 +44,7 @@ neoForge {
         }
 
         gameTestServer {
-            type = "gameTestServer"
+            gameTestServer()
             systemProperty 'neoforge.enabledGameTestNamespaces', mod_id
         }
 
