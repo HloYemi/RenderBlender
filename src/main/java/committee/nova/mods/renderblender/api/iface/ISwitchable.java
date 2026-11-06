@@ -1,11 +1,13 @@
 package committee.nova.mods.renderblender.api.iface;
 
+import net.minecraft.core.component.DataComponents;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.component.CustomData;
 import net.minecraft.world.level.Level;
 import org.jetbrains.annotations.NotNull;
 
@@ -20,6 +22,15 @@ import java.util.List;
 public interface ISwitchable {
 
     /**
+     * 读取 "mode" 子标签的副本（只读）。
+     * 1.21.1 起物品 NBT 不再直接挂在 ItemStack 上，需经由 DataComponents.CUSTOM_DATA。
+     */
+    private static CompoundTag modeTag(ItemStack stack) {
+        CompoundTag root = stack.getOrDefault(DataComponents.CUSTOM_DATA, CustomData.EMPTY).copyTag();
+        return root.contains("mode", CompoundTag.TAG_COMPOUND) ? root.getCompound("mode") : new CompoundTag();
+    }
+
+    /**
      * 检查指定功能是否处于激活状态
      *
      * @param stack    物品堆
@@ -27,8 +38,9 @@ public interface ISwitchable {
      * @return 是否激活
      */
     static boolean isMode(ItemStack stack, String funcName) {
-        if (!stack.getOrCreateTagElement("mode").contains(funcName)) return false;
-        return stack.getOrCreateTagElement("mode").getBoolean(funcName);
+        CompoundTag modeTag = modeTag(stack);
+        if (!modeTag.contains(funcName)) return false;
+        return modeTag.getBoolean(funcName);
     }
 
     /**
@@ -50,7 +62,7 @@ public interface ISwitchable {
      * @return 当前模式索引，-1表示无激活模式
      */
     static int getCurrentMode(ItemStack stack, List<String> modeList) {
-        CompoundTag modeTag = stack.getOrCreateTagElement("mode");
+        CompoundTag modeTag = modeTag(stack);
         for (int i = 0; i < modeList.size(); i++) {
             String mode = modeList.get(i);
             if (modeTag.contains(mode) && modeTag.getBoolean(mode)) {
@@ -79,17 +91,18 @@ public interface ISwitchable {
      * @param modeIndex 要激活的模式索引
      */
     default void setMode(ItemStack stack, List<String> modeList, int modeIndex) {
-        CompoundTag modeTag = stack.getOrCreateTagElement("mode");
-
-        // 先关闭所有模式
-        for (String mode : modeList) {
-            modeTag.putBoolean(mode, false);
-        }
-
-        // 激活指定模式
-        if (modeIndex >= 0 && modeIndex < modeList.size()) {
-            modeTag.putBoolean(modeList.get(modeIndex), true);
-        }
+        CustomData.update(DataComponents.CUSTOM_DATA, stack, root -> {
+            CompoundTag modeTag = root.contains("mode", CompoundTag.TAG_COMPOUND) ? root.getCompound("mode") : new CompoundTag();
+            // 先关闭所有模式
+            for (String mode : modeList) {
+                modeTag.putBoolean(mode, false);
+            }
+            // 激活指定模式
+            if (modeIndex >= 0 && modeIndex < modeList.size()) {
+                modeTag.putBoolean(modeList.get(modeIndex), true);
+            }
+            root.put("mode", modeTag);
+        });
     }
 
     /**
@@ -134,15 +147,16 @@ public interface ISwitchable {
         if (!modeList.contains(modeName)) return;
 
         ItemStack stack = player.getItemInHand(hand);
-        CompoundTag modeTag = stack.getOrCreateTagElement("mode");
-
-        // 关闭所有模式
-        for (String mode : modeList) {
-            modeTag.putBoolean(mode, false);
-        }
-
-        // 激活指定模式
-        modeTag.putBoolean(modeName, true);
+        CustomData.update(DataComponents.CUSTOM_DATA, stack, root -> {
+            CompoundTag modeTag = root.contains("mode", CompoundTag.TAG_COMPOUND) ? root.getCompound("mode") : new CompoundTag();
+            // 关闭所有模式
+            for (String mode : modeList) {
+                modeTag.putBoolean(mode, false);
+            }
+            // 激活指定模式
+            modeTag.putBoolean(modeName, true);
+            root.put("mode", modeTag);
+        });
 
         if (!world.isClientSide && player instanceof ServerPlayer serverPlayer) {
             Component modeTooltip = Component.translatable("tooltip.renderblender.tool." + modeName);
@@ -165,9 +179,12 @@ public interface ISwitchable {
      */
     default void switchMode(@NotNull Level world, Player player, @NotNull InteractionHand hand, String funcName) {
         ItemStack stack = player.getItemInHand(hand);
-        CompoundTag tags = stack.getOrCreateTagElement("mode");
+        CustomData.update(DataComponents.CUSTOM_DATA, stack, root -> {
+            CompoundTag modeTag = root.contains("mode", CompoundTag.TAG_COMPOUND) ? root.getCompound("mode") : new CompoundTag();
+            modeTag.putBoolean(funcName, !modeTag.getBoolean(funcName));
+            root.put("mode", modeTag);
+        });
         Component funcTooltip = Component.translatable("tooltip.renderblender.tool." + funcName);
-        tags.putBoolean(funcName, !tags.getBoolean(funcName));
         if (!world.isClientSide && player instanceof ServerPlayer serverPlayer)
 //            serverPlayer.sendSystemMessage(
 //                    tags.getBoolean(funcName) ? ModTooltips.ACTIVE.args(funcTooltip).build() : ModTooltips.INACTIVE.args(funcTooltip).build()

@@ -176,7 +176,7 @@ public class CCShaderInstance extends ShaderInstance {
     }
     @SuppressWarnings("removal")
     public Program compileProgram(ResourceProvider resourceProvider, Program.Type programType, ResourceLocation loc) throws IOException {
-        ResourceLocation adjustedLoc = ResourceLocation.parse(loc.getNamespace(), "shaders/core/" + loc.getPath() + programType.getExtension());
+        ResourceLocation adjustedLoc = ResourceLocation.fromNamespaceAndPath(loc.getNamespace(), "shaders/core/" + loc.getPath() + programType.getExtension());
         String cacheString = "ccl__" + adjustedLoc;
         Program program = programType.getPrograms().get(cacheString);
         if (program != null) return program;

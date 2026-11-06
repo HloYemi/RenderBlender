@@ -199,7 +199,7 @@ public class TextureUtils {
      * @return 贴图
      */
     public static TextureAtlasSprite getBlockTexture(ResourceLocation location) {
-        return getTexture(ResourceLocation.parse(location.getNamespace(), "block/" + location.getPath()));
+        return getTexture(ResourceLocation.fromNamespaceAndPath(location.getNamespace(), "block/" + location.getPath()));
     }
 
     /**
@@ -213,7 +213,7 @@ public class TextureUtils {
      * 获取指定命名空间的物品贴图
      */
     public static TextureAtlasSprite getItemTexture(ResourceLocation location) {
-        return getTexture(ResourceLocation.parse(location.getNamespace(), "items/" + location.getPath()));
+        return getTexture(ResourceLocation.fromNamespaceAndPath(location.getNamespace(), "items/" + location.getPath()));
     }
 
     /**
@@ -277,7 +277,7 @@ public class TextureUtils {
         ResourceLocation effectIcon;
         ResourceLocation registryName = BuiltInRegistries.MOB_EFFECT.getKey(mobEffectInstance.getEffect().value());
         if (registryName != null) {
-            effectIcon = ResourceLocation.parse(registryName.getNamespace(), DEFAULT_EFFECT_DIR + registryName.getPath() + ".png");
+            effectIcon = ResourceLocation.fromNamespaceAndPath(registryName.getNamespace(), DEFAULT_EFFECT_DIR + registryName.getPath() + ".png");
         } else {
             effectIcon = null;
         }

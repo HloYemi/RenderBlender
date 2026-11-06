@@ -101,8 +101,8 @@ public class CCRenderState {
      * @return The {@link BufferBuilder} instance from {@link Tesselator}.
      */
     public BufferBuilder startDrawing(VertexFormat.Mode mode, VertexFormat format) {
-        BufferBuilder r = Tesselator.getInstance().getBuilder();
-        r.begin(mode, format);
+        // 1.21.1: Tesselator#begin(VertexFormat.Mode, VertexFormat) returns the BufferBuilder, already begun.
+        BufferBuilder r = Tesselator.getInstance().begin(mode, format);
         bind(r);
         return r;
     }

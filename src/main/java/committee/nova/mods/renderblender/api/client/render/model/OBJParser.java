@@ -233,7 +233,7 @@ public class OBJParser {
             path = "";
         }
 
-        return ResourceLocation.parse(other.getNamespace(), path + "/" + resource);
+        return ResourceLocation.fromNamespaceAndPath(other.getNamespace(), path + "/" + resource);
     }
 
     /**

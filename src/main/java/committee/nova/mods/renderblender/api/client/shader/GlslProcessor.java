@@ -167,7 +167,7 @@ public class GlslProcessor {
                     }
                     ResourceLocation loc = ResourceLocation.parse(match);
                     if (includeFolder) {
-                        loc = ResourceLocation.parse(loc.getNamespace(), FilenameUtils.normalize("shaders/include/" + loc.getPath(), true));
+                        loc = ResourceLocation.fromNamespaceAndPath(loc.getNamespace(), FilenameUtils.normalize("shaders/include/" + loc.getPath(), true));
                     }
                     imports.add(loc);
                 }
