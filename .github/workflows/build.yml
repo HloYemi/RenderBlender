@@ -2,22 +2,39 @@ name: Build Mod
 
 on: [push, pull_request]
 
+# 必须加上这段权限声明，否则无法创建 Release
+permissions:
+  contents: write
+
 jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
       - name: Set up JDK 21
-        uses: actions/setup-java@v3
+        uses: actions/setup-java@v4
         with:
           java-version: '21'
           distribution: 'temurin'
+
       - name: Grant execute permission for gradlew
         run: chmod +x gradlew
+
       - name: Build with Gradle
         run: ./gradlew build
-      - name: Upload a Build Artifact
-        uses: actions/upload-artifact@v3
+
+      - name: Upload Jar to Release
+        uses: softprops/action-gh-release@v2
         with:
-          name: Mod-Jar
-          path: build/libs/*.jar
+          tag_name: build-${{ github.run_number }}
+          name: Build ${{ github.run_number }}
+          draft: false
+          prerelease: true
+          # 注意这里：我给带有感叹号的行加上了双引号，解决了划红线的问题
+          files: |
+            build/libs/*.jar
+            "!build/libs/*-sources.jar"
+            "!build/libs/*-dev.jar"
+            "!build/libs/*-javadoc.jar"
