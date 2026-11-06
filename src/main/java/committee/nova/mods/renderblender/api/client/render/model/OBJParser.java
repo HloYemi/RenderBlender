@@ -223,7 +223,7 @@ public class OBJParser {
     @SuppressWarnings("removal")
     private static ResourceLocation maybeRelative(ResourceLocation other, String resource) {
         if (resource.contains(":")) {
-            return new ResourceLocation(resource);
+            return ResourceLocation.parse(resource);
         }
         String path = other.getPath();
         int lastSlash = path.lastIndexOf("/");
@@ -233,7 +233,7 @@ public class OBJParser {
             path = "";
         }
 
-        return new ResourceLocation(other.getNamespace(), path + "/" + resource);
+        return ResourceLocation.parse(other.getNamespace(), path + "/" + resource);
     }
 
     /**

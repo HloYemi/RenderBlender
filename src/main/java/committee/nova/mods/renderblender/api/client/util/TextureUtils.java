@@ -176,7 +176,7 @@ public class TextureUtils {
      * 获取指定命名空间的任意贴图
      */
     public static TextureAtlasSprite getTexture(String location) {
-        return getTextureMap().getSprite(new ResourceLocation(location));
+        return getTextureMap().getSprite(ResourceLocation.parse(location));
     }
 
     /**
@@ -190,7 +190,7 @@ public class TextureUtils {
      * 获取指定命名空间的方块贴图
      */
     public static TextureAtlasSprite getBlockTexture(String string) {
-        return getBlockTexture(new ResourceLocation(string));
+        return getBlockTexture(ResourceLocation.parse(string));
     }
 
     /**
@@ -199,21 +199,21 @@ public class TextureUtils {
      * @return 贴图
      */
     public static TextureAtlasSprite getBlockTexture(ResourceLocation location) {
-        return getTexture(new ResourceLocation(location.getNamespace(), "block/" + location.getPath()));
+        return getTexture(ResourceLocation.parse(location.getNamespace(), "block/" + location.getPath()));
     }
 
     /**
      * 获取指定命名空间的物品贴图
      */
     public static TextureAtlasSprite getItemTexture(String string) {
-        return getItemTexture(new ResourceLocation(string));
+        return getItemTexture(ResourceLocation.parse(string));
     }
 
     /**
      * 获取指定命名空间的物品贴图
      */
     public static TextureAtlasSprite getItemTexture(ResourceLocation location) {
-        return getTexture(new ResourceLocation(location.getNamespace(), "items/" + location.getPath()));
+        return getTexture(ResourceLocation.parse(location.getNamespace(), "items/" + location.getPath()));
     }
 
     /**
@@ -277,7 +277,7 @@ public class TextureUtils {
         ResourceLocation effectIcon;
         ResourceLocation registryName = BuiltInRegistries.MOB_EFFECT.getKey(mobEffectInstance.getEffect().value());
         if (registryName != null) {
-            effectIcon = new ResourceLocation(registryName.getNamespace(), DEFAULT_EFFECT_DIR + registryName.getPath() + ".png");
+            effectIcon = ResourceLocation.parse(registryName.getNamespace(), DEFAULT_EFFECT_DIR + registryName.getPath() + ".png");
         } else {
             effectIcon = null;
         }

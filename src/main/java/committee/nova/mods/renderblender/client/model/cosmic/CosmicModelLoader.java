@@ -64,7 +64,7 @@ public class CosmicModelLoader implements IGeometryLoader<CosmicModelLoader.Cosm
         public BakedModel bake(IGeometryBakingContext context, ModelBaker baker, Function<Material, TextureAtlasSprite> spriteGetter, ModelState modelState, ItemOverrides overrides, ResourceLocation modelLocation) {
             BakedModel baseBakedModel = this.baseModel.bake(baker, this.baseModel, spriteGetter, modelState, modelLocation, true);
             List<ResourceLocation> textures = new ArrayList<>();
-            this.maskTextures.forEach(mask -> textures.add(new ResourceLocation(mask)));
+            this.maskTextures.forEach(mask -> textures.add(ResourceLocation.parse(mask)));
             return new CosmicBakeModel(baseBakedModel, textures);
         }
 

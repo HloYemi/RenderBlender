@@ -229,7 +229,7 @@ public class HaloModelLoader implements IGeometryLoader<HaloModelLoader.HaloItem
             Material particleLocation = this.baseModel.getMaterial(this.texture);
             TextureAtlasSprite particle =
                     spriteGetter.apply(particleLocation);
-            //Minecraft.getInstance().getTextureAtlas(InventoryMenu.BLOCK_ATLAS).apply(new ResourceLocation(Static.MOD_ID, "misc/halo"));
+            //Minecraft.getInstance().getTextureAtlas(InventoryMenu.BLOCK_ATLAS).apply(ResourceLocation.fromNamespaceAndPath(Static.MOD_ID, "misc/halo"));
             //Static.LOGGER.info("test1"+ particle.toString());
             return new HaloBakedModel(tintLayers(bakedBaseModel, layerColors), particle, this.color, this.size, this.pulse);
         }

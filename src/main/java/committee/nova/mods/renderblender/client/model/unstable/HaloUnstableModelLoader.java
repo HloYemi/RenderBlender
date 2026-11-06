@@ -97,7 +97,7 @@ public class HaloUnstableModelLoader implements IGeometryLoader<HaloUnstableMode
 
 
             List<ResourceLocation> textures = new ArrayList<>();
-            this.maskTextures.forEach(mask -> textures.add(new ResourceLocation(mask)));
+            this.maskTextures.forEach(mask -> textures.add(ResourceLocation.parse(mask)));
 
 
             return new HaloUnstableBakedModel(HaloModelLoader.HaloItemModelGeometry.tintLayers(bakedBaseModel, layerColors),

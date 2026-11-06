@@ -97,7 +97,7 @@ public class HaloHellModelLoader implements IGeometryLoader<HaloHellModelLoader.
 
 
             List<ResourceLocation> textures = new ArrayList<>();
-            this.maskTextures.forEach(mask -> textures.add(new ResourceLocation(mask)));
+            this.maskTextures.forEach(mask -> textures.add(ResourceLocation.parse(mask)));
 
             return new HaloHellBakedModel(HaloModelLoader.HaloItemModelGeometry.tintLayers(bakedBaseModel, layerColors),
                     particle, this.color, this.size, this.pulse, textures);

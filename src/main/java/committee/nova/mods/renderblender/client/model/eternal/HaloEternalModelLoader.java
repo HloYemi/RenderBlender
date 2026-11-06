@@ -100,7 +100,7 @@ public class HaloEternalModelLoader implements IGeometryLoader<HaloEternalModelL
 
 
             List<ResourceLocation> textures = new ArrayList<>();
-            this.maskTextures.forEach(mask -> textures.add(new ResourceLocation(mask)));
+            this.maskTextures.forEach(mask -> textures.add(ResourceLocation.parse(mask)));
 
 
             return new HaloEternalBakedModel(HaloModelLoader.HaloItemModelGeometry.tintLayers(bakedBaseModel, layerColors),

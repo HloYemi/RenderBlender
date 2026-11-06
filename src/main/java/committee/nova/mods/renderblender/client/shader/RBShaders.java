@@ -66,12 +66,12 @@ public class RBShaders {
     @SuppressWarnings("removal")
     public static void onRegisterShaders(RegisterShadersEvent event) {
 
-        COSMIC_SHADER = CCShaderInstance.create(event.getResourceProvider(), new ResourceLocation(RenderBlenderLib.MOD_ID, "cosmic"), DefaultVertexFormat.BLOCK);
-        COSMIC_ARMOR_SHADER = CCShaderInstance.create(event.getResourceProvider(), new ResourceLocation(RenderBlenderLib.MOD_ID, "cosmic"), DefaultVertexFormat.NEW_ENTITY);
-        ETERNAL_SHADER = CCShaderInstance.create(event.getResourceProvider(), new ResourceLocation(RenderBlenderLib.MOD_ID, "eternal"), DefaultVertexFormat.BLOCK);
-        HELL_SHADER = CCShaderInstance.create(event.getResourceProvider(), new ResourceLocation(RenderBlenderLib.MOD_ID, "hell"), DefaultVertexFormat.BLOCK);
-        UNSTABLE_SHADER = CCShaderInstance.create(event.getResourceProvider(), new ResourceLocation(RenderBlenderLib.MOD_ID, "unstable"), DefaultVertexFormat.BLOCK);
-        GLOW_EDGE_SHADER = CCShaderInstance.create(event.getResourceProvider(), new ResourceLocation(RenderBlenderLib.MOD_ID, "glow_edge"), DefaultVertexFormat.NEW_ENTITY);
+        COSMIC_SHADER = CCShaderInstance.create(event.getResourceProvider(), ResourceLocation.fromNamespaceAndPath(RenderBlenderLib.MOD_ID, "cosmic"), DefaultVertexFormat.BLOCK);
+        COSMIC_ARMOR_SHADER = CCShaderInstance.create(event.getResourceProvider(), ResourceLocation.fromNamespaceAndPath(RenderBlenderLib.MOD_ID, "cosmic"), DefaultVertexFormat.NEW_ENTITY);
+        ETERNAL_SHADER = CCShaderInstance.create(event.getResourceProvider(), ResourceLocation.fromNamespaceAndPath(RenderBlenderLib.MOD_ID, "eternal"), DefaultVertexFormat.BLOCK);
+        HELL_SHADER = CCShaderInstance.create(event.getResourceProvider(), ResourceLocation.fromNamespaceAndPath(RenderBlenderLib.MOD_ID, "hell"), DefaultVertexFormat.BLOCK);
+        UNSTABLE_SHADER = CCShaderInstance.create(event.getResourceProvider(), ResourceLocation.fromNamespaceAndPath(RenderBlenderLib.MOD_ID, "unstable"), DefaultVertexFormat.BLOCK);
+        GLOW_EDGE_SHADER = CCShaderInstance.create(event.getResourceProvider(), ResourceLocation.fromNamespaceAndPath(RenderBlenderLib.MOD_ID, "glow_edge"), DefaultVertexFormat.NEW_ENTITY);
 
         event.registerShader(COSMIC_SHADER, RBShaders::cosmicShader);
         event.registerShader(COSMIC_ARMOR_SHADER, RBShaders::cosmicShader);

@@ -46,7 +46,7 @@ public class ResourceUtils {
      */
     @SuppressWarnings("removal")
     public static Resource getResource(String location) throws IOException {
-        return getResource(new ResourceLocation(location));
+        return getResource(ResourceLocation.parse(location));
     }
 
     /**
