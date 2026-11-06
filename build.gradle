@@ -44,7 +44,7 @@ neoForge {
         }
 
         gameTestServer {
-            gameTestServer()
+            type = "gameTestServer"
             systemProperty 'neoforge.enabledGameTestNamespaces', mod_id
         }
 
