@@ -11,6 +11,7 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.GsonHelper;
 import net.neoforged.neoforge.client.model.geometry.IGeometryBakingContext;
 import net.neoforged.neoforge.client.model.geometry.IGeometryLoader;
+import net.neoforged.neoforge.client.model.geometry.UnbakedGeometryHelper;
 import net.neoforged.neoforge.client.model.geometry.IUnbakedGeometry;
 
 import java.util.function.Function;
@@ -54,8 +55,8 @@ public class GlowEdgeModelLoader implements IGeometryLoader<GlowEdgeModelLoader.
         }
 
         @Override
-        public BakedModel bake(IGeometryBakingContext context, ModelBaker baker, Function<Material, TextureAtlasSprite> spriteGetter, ModelState modelState, ItemOverrides overrides, ResourceLocation modelLocation) {
-            BakedModel bakedBaseModel = this.baseModel.bake(baker, this.baseModel, spriteGetter, modelState, modelLocation, true);
+        public BakedModel bake(IGeometryBakingContext context, ModelBaker baker, Function<Material, TextureAtlasSprite> spriteGetter, ModelState modelState, ItemOverrides overrides) {
+            BakedModel bakedBaseModel = UnbakedGeometryHelper.bake(this.baseModel, baker, this.baseModel, spriteGetter, modelState, true);
             return new GlowEdgeBakedModel(bakedBaseModel, color, width, offset);
         }
 

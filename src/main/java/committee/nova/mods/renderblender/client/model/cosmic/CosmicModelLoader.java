@@ -12,6 +12,7 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.GsonHelper;
 import net.neoforged.neoforge.client.model.geometry.IGeometryBakingContext;
 import net.neoforged.neoforge.client.model.geometry.IGeometryLoader;
+import net.neoforged.neoforge.client.model.geometry.UnbakedGeometryHelper;
 import net.neoforged.neoforge.client.model.geometry.IUnbakedGeometry;
 
 import java.util.ArrayList;
@@ -61,8 +62,8 @@ public class CosmicModelLoader implements IGeometryLoader<CosmicModelLoader.Cosm
         }
         @SuppressWarnings("removal")
         @Override
-        public BakedModel bake(IGeometryBakingContext context, ModelBaker baker, Function<Material, TextureAtlasSprite> spriteGetter, ModelState modelState, ItemOverrides overrides, ResourceLocation modelLocation) {
-            BakedModel baseBakedModel = this.baseModel.bake(baker, this.baseModel, spriteGetter, modelState, modelLocation, true);
+        public BakedModel bake(IGeometryBakingContext context, ModelBaker baker, Function<Material, TextureAtlasSprite> spriteGetter, ModelState modelState, ItemOverrides overrides) {
+            BakedModel baseBakedModel = UnbakedGeometryHelper.bake(this.baseModel, baker, this.baseModel, spriteGetter, modelState, true);
             List<ResourceLocation> textures = new ArrayList<>();
             this.maskTextures.forEach(mask -> textures.add(ResourceLocation.parse(mask)));
             return new CosmicBakeModel(baseBakedModel, textures);

@@ -21,6 +21,7 @@ import net.minecraft.util.RandomSource;
 import net.neoforged.neoforge.client.RenderTypeGroup;
 import net.neoforged.neoforge.client.model.geometry.IGeometryBakingContext;
 import net.neoforged.neoforge.client.model.geometry.IGeometryLoader;
+import net.neoforged.neoforge.client.model.geometry.UnbakedGeometryHelper;
 import net.neoforged.neoforge.client.model.geometry.IUnbakedGeometry;
 import org.apache.commons.lang3.tuple.Pair;
 
@@ -223,8 +224,8 @@ public class HaloModelLoader implements IGeometryLoader<HaloModelLoader.HaloItem
         }
 
         @Override
-        public BakedModel bake(final IGeometryBakingContext owner, final ModelBaker bakery, final Function<Material, TextureAtlasSprite> spriteGetter, final ModelState modelTransform, final ItemOverrides overrides, final ResourceLocation modelLocation) {
-            final BakedModel bakedBaseModel = this.baseModel.bake(bakery, this.baseModel, spriteGetter, modelTransform, modelLocation, false);
+        public BakedModel bake(final IGeometryBakingContext owner, final ModelBaker bakery, final Function<Material, TextureAtlasSprite> spriteGetter, final ModelState modelTransform, final ItemOverrides overrides) {
+            final BakedModel bakedBaseModel = UnbakedGeometryHelper.bake(this.baseModel, bakery, this.baseModel, spriteGetter, modelTransform, false);
             //Static.LOGGER.info("test0"+ this.texture);
             Material particleLocation = this.baseModel.getMaterial(this.texture);
             TextureAtlasSprite particle =
