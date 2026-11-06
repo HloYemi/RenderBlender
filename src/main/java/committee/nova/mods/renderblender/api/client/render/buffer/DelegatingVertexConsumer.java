@@ -8,6 +8,10 @@ import org.jetbrains.annotations.NotNull;
  * A simple {@link VertexConsumer} implementation which forwards to a delegate.
  * <p>
  * Created by covers1624 on 29/3/22.
+ * <p>
+ * Ported to 1.21.1 vertex API: vertex()->addVertex(), color()->setColor(),
+ * uv()->setUv(), overlayCoords()->setUv1(), uv2()->setUv2(), normal()->setNormal().
+ * endVertex()/defaultColor()/unsetDefaultColor() were removed from VertexConsumer.
  */
 public abstract class DelegatingVertexConsumer implements ISpriteAwareVertexConsumer {
 
@@ -25,53 +29,38 @@ public abstract class DelegatingVertexConsumer implements ISpriteAwareVertexCons
     }
 
     @Override
-    public @NotNull VertexConsumer vertex(double x, double y, double z) {
-        delegate.vertex(x, y, z);
+    public @NotNull VertexConsumer addVertex(float x, float y, float z) {
+        delegate.addVertex(x, y, z);
         return this;
     }
 
     @Override
-    public @NotNull VertexConsumer color(int r, int g, int b, int a) {
-        delegate.color(r, g, b, a);
+    public @NotNull VertexConsumer setColor(int r, int g, int b, int a) {
+        delegate.setColor(r, g, b, a);
         return this;
     }
 
     @Override
-    public @NotNull VertexConsumer uv(float u, float v) {
-        delegate.uv(u, v);
+    public @NotNull VertexConsumer setUv(float u, float v) {
+        delegate.setUv(u, v);
         return this;
     }
 
     @Override
-    public @NotNull VertexConsumer overlayCoords(int u, int v) {
-        delegate.overlayCoords(u, v);
+    public @NotNull VertexConsumer setUv1(int u, int v) {
+        delegate.setUv1(u, v);
         return this;
     }
 
     @Override
-    public @NotNull VertexConsumer uv2(int u, int v) {
-        delegate.uv2(u, v);
+    public @NotNull VertexConsumer setUv2(int u, int v) {
+        delegate.setUv2(u, v);
         return this;
     }
 
     @Override
-    public @NotNull VertexConsumer normal(float x, float y, float z) {
-        delegate.normal(x, y, z);
+    public @NotNull VertexConsumer setNormal(float x, float y, float z) {
+        delegate.setNormal(x, y, z);
         return this;
-    }
-
-    @Override
-    public void endVertex() {
-        delegate.endVertex();
-    }
-
-    @Override
-    public void defaultColor(int r, int g, int b, int a) {
-        delegate.defaultColor(r, g, b, a);
-    }
-
-    @Override
-    public void unsetDefaultColor() {
-        delegate.unsetDefaultColor();
     }
 }
