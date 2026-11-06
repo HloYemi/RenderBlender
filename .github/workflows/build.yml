@@ -22,8 +22,19 @@ jobs:
       - name: Grant execute permission for gradlew
         run: chmod +x gradlew
 
+      - name: Cache Gradle dependencies
+        uses: actions/cache@v4
+        with:
+          path: |
+            ~/.gradle/caches
+            ~/.gradle/wrapper
+            .gradle
+          key: gradle-${{ runner.os }}-${{ hashFiles('**/*.gradle*', '**/gradle-wrapper.properties', '**/gradle.properties') }}
+          restore-keys: |
+            gradle-${{ runner.os }}-
+
       - name: Build with Gradle
-        run: ./gradlew build --offline
+        run: ./gradlew build
 
       - name: Upload Jar to Release
         uses: softprops/action-gh-release@v2
