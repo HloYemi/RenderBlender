@@ -9,15 +9,16 @@ import net.minecraft.client.renderer.ShaderInstance;
 import net.minecraft.resources.ResourceLocation;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.api.distmarker.OnlyIn;
+import net.neoforged.neoforge.client.event.ClientTickEvent;
 import net.neoforged.neoforge.client.event.RegisterShadersEvent;
+import net.neoforged.neoforge.client.event.RenderFrameEvent;
 import net.neoforged.neoforge.client.event.ScreenEvent;
-import net.neoforged.neoforge.event.TickEvent;
 import net.neoforged.bus.api.SubscribeEvent;
-import net.neoforged.fml.common.Mod;
+import net.neoforged.fml.common.EventBusSubscriber;
 
 import java.util.Objects;
 
-@Mod.EventBusSubscriber(modid = RenderBlenderLib.MOD_ID, value = Dist.CLIENT, bus = Mod.EventBusSubscriber.Bus.FORGE)
+@EventBusSubscriber(modid = RenderBlenderLib.MOD_ID, value = Dist.CLIENT, bus = EventBusSubscriber.Bus.GAME)
 public class RBShaders {
     public static boolean inventoryRender = false;
     public static int renderTime;
@@ -156,16 +157,16 @@ public class RBShaders {
     }
 
     @SubscribeEvent
-    public static void clientTick(TickEvent.ClientTickEvent event) {
-        if (!Minecraft.getInstance().isPaused() && event.phase == TickEvent.Phase.END) {
+    public static void clientTick(ClientTickEvent.Post event) {
+        if (!Minecraft.getInstance().isPaused()) {
             ++renderTime;
         }
     }
 
     @SubscribeEvent
-    public static void renderTick(TickEvent.RenderTickEvent event) {
-        if (!Minecraft.getInstance().isPaused() && event.phase == TickEvent.Phase.START) {
-            renderFrame = event.renderTickTime;
+    public static void renderTick(RenderFrameEvent.Pre event) {
+        if (!Minecraft.getInstance().isPaused()) {
+            renderFrame = event.getPartialTick().getGameTimeDeltaPartialTick(true);
         }
     }
 

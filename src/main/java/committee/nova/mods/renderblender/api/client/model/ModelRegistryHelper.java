@@ -5,7 +5,6 @@ import net.minecraft.client.resources.model.ModelResourceLocation;
 import net.neoforged.neoforge.client.event.ModelEvent;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.bus.api.SubscribeEvent;
-import net.neoforged.fml.javafmlmod.FMLJavaModLoadingContext;
 import org.apache.commons.lang3.tuple.ImmutablePair;
 import org.apache.commons.lang3.tuple.Pair;
 
@@ -15,11 +14,6 @@ import java.util.List;
 public class ModelRegistryHelper {
 
     private final List<Pair<ModelResourceLocation, BakedModel>> registerModels = new LinkedList<>();
-
-    @SuppressWarnings("removal")
-    public ModelRegistryHelper() {
-        this(FMLJavaModLoadingContext.get().getModEventBus());
-    }
 
     public ModelRegistryHelper(IEventBus eventBus) {
         eventBus.register(this);
